@@ -1,0 +1,45 @@
+{
+    "name": "@wxn0brp/falcon-frame-lang",
+    "version": "0.0.1",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "description": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wxn0brP/FalconFrame-lang.git"
+    },
+    "homepage": "https://github.com/wxn0brP/FalconFrame",
+    "author": "wxn0brP",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "build": "tsc && tsc-alias",
+        "start": "node dist/index.js",
+        "bun": "bun run src/index.ts"
+    },
+    "devDependencies": {
+        "@types/node": "*",
+        "@wxn0brp/ac": "^0.0.2",
+        "@wxn0brp/falcon-frame": "^0.4.0",
+        "typescript": "*"
+    },
+    "peerDependencies": {
+        "@wxn0brp/ac": ">=0.0.2",
+        "@wxn0brp/falcon-frame": ">=0.4.0"
+    },
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "default": "./dist/index.js"
+        },
+        "./*": {
+            "types": "./dist/*.d.ts",
+            "import": "./dist/*.js",
+            "default": "./dist/*.js"
+        }
+    }
+}
