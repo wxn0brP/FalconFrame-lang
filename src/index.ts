@@ -30,6 +30,7 @@ export function createLangRouter(config: Config): RouteHandler {
         const dataObj: any = {
             title: meta.title || name,
             lang,
+            name,
             ...(mapLangData || {}),
             ...(config.getSpecific?.(name) || {})
         }
