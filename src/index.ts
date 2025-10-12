@@ -38,16 +38,16 @@ export function createLangRouter(config: Config): RouteHandler {
         const main = renderHTML(config.dir + name + ".html", dataObj);
         let html = renderHTML(config.layout, { body: main, ...dataObj });
 
-        html = translateHtml(html, langData);
+        html = translateHtml(html, langData, lang);
         res.ct("text/html; charset=utf-8");
         res.end(html);
     }
 }
 
-function translateHtml(html: string, langData: Record<string, string>): string {
+function translateHtml(html: string, langData: Record<string, string>, lang: string = "en"): string {
     html = html.replace(
         /<([^>]*?)\s+translate\s*=\s*["']([^"']+)["']([^>]*?)>(.*?)<\/[^>]*?>/gs,
-        (fullMatch, beforeTranslate, translateValue, afterTranslate, innerHTML) => {
+        (fullMatch, beforeTranslate, translateValue, afterTranslate) => {
             let translatedText = langData[translateValue] || translateValue;
             return `<${beforeTranslate} translate="${translateValue}" ${afterTranslate}>${translatedText}</${fullMatch.match(/<\/(\w+)/)[1]}>`;
         }
@@ -55,9 +55,16 @@ function translateHtml(html: string, langData: Record<string, string>): string {
 
     html = html.replace(
         /(<[^>]*?)\s+translate-([a-z-]+)=["']([^"']+)["']([^>]*>)/gi,
-        (fullMatch, beforeTag, attrName, attrValue, afterTag) => {
+        (_, beforeTag, attrName, attrValue, afterTag) => {
             const translatedValue = langData[attrValue] || attrValue;
             return `${beforeTag} translate-${attrName}="${attrValue}" ${attrName}="${translatedValue}"${afterTag}`;
+        }
+    );
+
+    html = html.replace(
+        /<html\s+lang=["']([^"']+)["']>/gi,
+        () => {
+            return `<html lang="${lang}">`;
         }
     );
 
