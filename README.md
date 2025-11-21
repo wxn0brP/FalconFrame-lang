@@ -17,7 +17,7 @@ This package provides easy-to-use internationalization (i18n) functionality for 
 ## Installation
 
 ```bash
-yarn add github:wxn0brP/FalconFrame-lang#dist
+npm i @wxn0brp/falcon-frame-lang
 ```
 
 ## Usage
