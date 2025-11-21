@@ -25,13 +25,13 @@
     ],
     "devDependencies": {
         "@types/node": "*",
-        "@wxn0brp/ac": "^0.0.2",
-        "@wxn0brp/falcon-frame": "^0.4.0",
+        "@wxn0brp/ac": "^0.0.3",
+        "@wxn0brp/falcon-frame": "^0.5.3",
         "typescript": "*"
     },
     "peerDependencies": {
-        "@wxn0brp/ac": ">=0.0.2",
-        "@wxn0brp/falcon-frame": ">=0.4.0"
+        "@wxn0brp/ac": ">=0.0.3",
+        "@wxn0brp/falcon-frame": ">=0.5.3"
     },
     "files": [
         "dist"
