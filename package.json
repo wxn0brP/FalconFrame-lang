@@ -26,7 +26,7 @@
     "devDependencies": {
         "@types/node": "*",
         "@wxn0brp/ac": "^0.0.3",
-        "@wxn0brp/falcon-frame": "^0.5.3",
+        "@wxn0brp/falcon-frame": "^0.6.0",
         "tsc-alias": "*",
         "typescript": "*"
     },
