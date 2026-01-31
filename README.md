@@ -17,7 +17,7 @@ This package provides easy-to-use internationalization (i18n) functionality for 
 ## Installation
 
 ```bash
-npm i @wxn0brp/falcon-frame-lang
+npm i @wxn0brp/falcon-frame-lang @wxn0brp/falcon-frame
 ```
 
 ## Usage
@@ -26,22 +26,27 @@ npm i @wxn0brp/falcon-frame-lang
 
 ```typescript
 import { createLangRouter } from "@wxn0brp/falcon-frame-lang";
+import { FalconFrame } from "@wxn0brp/falcon-frame";
+
+const app = new FalconFrame();
 
 const config = {
     meta: {
         "home": { title: "Home Page" },
         "about": { title: "About Us" }
-    },
+    },                            // Meta data for specific pages
     dir: "public",                // Directory containing HTML files (default: "public")
     layout: "public/layout.html", // Layout file path (default: "public/layout.html")
     langDir: "public/lang",       // Directory containing language JSON files (default: "public/lang")
-    getSpecific: (name: string) => {
+    disableCache: false,          // Disable caching of language data
+    getSpecific: async (name: string) => {
         // Return specific data for the given page name
         return {};
     }
 };
 
 const langRouter = createLangRouter(config);
+app.use("/:name", langRouter);
 ```
 
 ### Language Files
