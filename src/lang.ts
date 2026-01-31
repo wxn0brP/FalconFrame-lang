@@ -13,13 +13,13 @@ export function getLang(req: FFRequest) {
 }
 
 export function getLangData(req: FFRequest, config: Config, lang: string = getLang(req)): Record<string, string> {
-    if (cache.has(lang)) return cache.get(lang);
+    if (!config.disableCache && cache.has(lang)) return cache.get(lang);
 
     const path = config.langDir + lang + ".json";
     if (existsSync(path)) {
         try {
             const data = JSON.parse(readFileSync(path, "utf-8"));
-            cache.set(lang, data);
+            if (!config.disableCache) cache.set(lang, data);
             return data;
         } catch { }
     }

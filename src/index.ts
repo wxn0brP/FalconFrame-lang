@@ -2,21 +2,29 @@ import { renderHTML, RouteHandler } from "@wxn0brp/falcon-frame";
 import { getLang, getLangData } from "./lang";
 import { Config } from "./types";
 
-export function createLangRouter(config: Config): RouteHandler {
-    config = {
+export function createLangRouter(cfg: Partial<Config>): RouteHandler {
+    const config: Config = {
         dir: "public",
         layout: "public/layout.html",
         langDir: "public/lang",
-        ...config
-    }
+        disableCache: false,
+        meta: undefined,
+        getSpecific: () => ({}),
+        ...cfg
+    };
+
     if (!config.dir.endsWith("/")) config.dir += "/";
     if (!config.langDir.endsWith("/")) config.langDir += "/";
 
-    return (req, res, next) => {
+    return async (req, res, next) => {
         const name = req.params.name;
 
-        const meta = config.meta[name] || config.meta["*"];
-        if (!meta) return next();
+        let meta: Config["meta"] = {};
+
+        if (config.meta) {
+            meta = config.meta[name] || config.meta["*"];
+            if (!meta) return next();
+        }
 
         const lang = getLang(req);
         const langData = getLangData(req, config, lang);
@@ -28,19 +36,19 @@ export function createLangRouter(config: Config): RouteHandler {
         }, {});
 
         const dataObj: any = {
-            title: meta.title || name,
             lang,
             name,
             ...(mapLangData || {}),
-            ...(config.getSpecific?.(name) || {})
+            ...(await config.getSpecific?.(name) || {})
         }
+        if (meta?.title) dataObj.title = meta.title;
 
-        const main = renderHTML(config.dir + name + ".html", dataObj);
-        let html = renderHTML(config.layout, { body: main, ...dataObj });
+        const html = renderHTML(config.dir + name + ".html", dataObj, [], res.FF);
 
-        html = translateHtml(html, langData, lang);
         res.ct("text/html; charset=utf-8");
-        res.end(html);
+        res.end(
+            translateHtml(html, langData, lang)
+        );
     }
 }
 
