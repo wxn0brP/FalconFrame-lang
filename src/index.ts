@@ -10,6 +10,7 @@ export function createLangRouter(cfg: Partial<Config>): RouteHandler {
         disableCache: false,
         meta: undefined,
         getSpecific: () => ({}),
+        FFVar: {},
         ...cfg
     };
 
@@ -43,7 +44,15 @@ export function createLangRouter(cfg: Partial<Config>): RouteHandler {
         }
         if (meta?.title) dataObj.title = meta.title;
 
-        const html = renderHTML(config.dir + name + ".html", dataObj, [], res.FF);
+        const html = renderHTML({
+            templatePath: config.dir + name + ".html",
+            data: dataObj,
+            FF: res.FF,
+            FFVar: {
+                ...config.FFVar,
+                layout: config.layout
+            }
+        });
 
         res.ct("text/html; charset=utf-8");
         res.end(
