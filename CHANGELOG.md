@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/wxn0brP/FalconFrame-lang/compare/v0.1.0...v0.1.1) (2026-03-21)
+
+
+### Features
+
+* update FF & fix layout issue ([4913c50](https://github.com/wxn0brP/FalconFrame-lang/commit/4913c50ff0ad99a1ed2123284722c51b63e0ead9))
+
 ## [0.1.0](https://github.com/wxn0brP/FalconFrame-lang/compare/v0.0.3...v0.1.0) (2026-01-31)
 
 
