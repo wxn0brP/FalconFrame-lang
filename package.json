@@ -28,7 +28,7 @@
         "@wxn0brp/ac": "^0.0.3",
         "@wxn0brp/falcon-frame": "^0.8.0",
         "tsc-alias": "*",
-        "typescript": "^5"
+        "typescript": "^6.0.0"
     },
     "peerDependencies": {
         "@wxn0brp/ac": ">=0.0.3",
