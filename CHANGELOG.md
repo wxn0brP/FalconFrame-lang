@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/wxn0brP/FalconFrame-lang/compare/v0.1.1...v0.1.2) (2026-10-11)
+
+
+### Features
+
+* bump deps & add biome & update config & improve ([6f17f06](https://github.com/wxn0brP/FalconFrame-lang/commit/6f17f063f9622b3e1c45ff7378a2a9dff4380bc5))
+
+
+### Bug Fixes
+
+* types ([846dadd](https://github.com/wxn0brP/FalconFrame-lang/commit/846dadd711bee02450358f8c24637f12e17ffcc7))
+
 ### [0.1.1](https://github.com/wxn0brP/FalconFrame-lang/compare/v0.1.0...v0.1.1) (2026-03-21)
 
 
