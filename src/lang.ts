@@ -6,23 +6,28 @@ import { Config } from "./types";
 export const cache = new AnotherCache();
 
 export function getLang(req: FFRequest) {
-    let lang = req.query.lang || req.cookies.lang || req.headers["accept-language"];
-    if (!lang) return "en";
-    lang = lang.split(",")[0].split(";")[0].split("-")[0];
-    return lang;
+	let lang =
+		req.query.lang || req.cookies.lang || req.headers["accept-language"];
+	if (!lang) return "en";
+	lang = lang.split(",")[0].split(";")[0].split("-")[0];
+	return lang;
 }
 
-export function getLangData(req: FFRequest, config: Config, lang: string = getLang(req)): Record<string, string> {
-    if (!config.disableCache && cache.has(lang)) return cache.get(lang);
+export function getLangData(
+	req: FFRequest,
+	config: Config,
+	lang: string = getLang(req),
+): Record<string, string> {
+	if (!config.disableCache && cache.has(lang)) return cache.get(lang);
 
-    const path = config.langDir + lang + ".json";
-    if (existsSync(path)) {
-        try {
-            const data = JSON.parse(readFileSync(path, "utf-8"));
-            if (!config.disableCache) cache.set(lang, data);
-            return data;
-        } catch { }
-    }
+	const path = config.langDir + lang + ".json";
+	if (existsSync(path)) {
+		try {
+			const data = JSON.parse(readFileSync(path, "utf-8"));
+			if (!config.disableCache) cache.set(lang, data);
+			return data;
+		} catch {}
+	}
 
-    return {};
+	return {};
 }
